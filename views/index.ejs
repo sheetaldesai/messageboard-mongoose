@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/quote.css">
+    <title>Mongoose Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Add new Mongoose</h2>
+       
+        <form action="/posts" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="name">Message:</label>
+                <input type="textarea" class="form-control" name='text'>
+            </div>
+            <button type="submit" class="btn btn-primary">Post a message!</button>
+        </form>
+        <% for(var post of posts){ %>
+            <p>Name: <%= post.name %></p>
+            <p>Post: <%= post.text %></p>
+            <form action="/comments/<%= post.id %>" method="post">
+                <div class="form-group">
+                    Name: <input type="text" name="name" class="form-control">
+                    Comment: <input type="text" name="text" class="form-control">
+                </div>
+              <input type="submit" value="Submit!">
+            </form>
+            <% for(var comment of post._comments){ %>
+              <p>Name: <%= comment.name %></p>
+              <p>Comment: <%= comment.text %></p>
+            <% } %>
+            <hr>
+          <% } %>
+
+    </div>
+</body>        
